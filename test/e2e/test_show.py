@@ -136,20 +136,38 @@ def test_show_list_active_shows(page: Page):
     assert _show_card_links(page) == {f"/show/{slug}/" for slug, fm in SHOWS.items() if fm.get("active")}
 
 
+ARCHIVE = "https://archive.jupiterbroadcasting.com"
+ARCHIVED_SHOWS = [
+    line for line in (REPO_ROOT / "scripts/archived-shows.txt").read_text().splitlines() if line and not line.startswith("#")
+]
+
+
+def test_no_retired_shows_left():
+    """
+    Retired shows live on the archive site; any active = false show here would be shadowed by the redirects
+    """
+    assert [slug for slug, fm in SHOWS.items() if not fm.get("active")] == []
+    assert not set(ARCHIVED_SHOWS) & set(SHOWS), "a show in scripts/archived-shows.txt still has content here"
+
+
 @mark.only_browser("chromium")
-def test_archive_lists_archived_shows(page: Page):
+@mark.parametrize("path", ["/archive/", "/archive/page/2/"])
+def test_archive_redirects_to_archive_site(api_request_context, path: str):
+    response = api_request_context.get(path, max_redirects=0)
+    assert response.status == 301
+    assert response.headers["location"] == f"{ARCHIVE}/"
+
+
+@mark.only_browser("chromium")
+@mark.parametrize("slug", ARCHIVED_SHOWS)
+def test_retired_show_urls_redirect(api_request_context, slug: str):
     """
-    /archive/ lists exactly the shows that are no longer active
+    Old /show/<retired>/... URLs 301 to the same path on the archive site (nginx in Dockerfile)
     """
-    archived = {f"/show/{slug}/" for slug, fm in SHOWS.items() if not fm.get("active")}
-    found: set[str] = set()
-    for n in range(1, math.ceil(len(archived) / PAGINATE) + 1):
-        response = page.goto("/archive/" if n == 1 else f"/archive/page/{n}/")
-        assert response.status == 200
-        links = _show_card_links(page)
-        assert len(links) <= PAGINATE
-        found |= links
-    assert found == archived
+    for path in (f"/show/{slug}/", f"/show/{slug}/1/", f"/show/{slug}/index.md"):
+        response = api_request_context.get(path, max_redirects=0)
+        assert response.status == 301, f"{path} returned {response.status}"
+        assert response.headers["location"] == f"{ARCHIVE}{path}"
 
 
 def _subscribe_front_matter(slug: str) -> tuple[str, dict[str, str]]:

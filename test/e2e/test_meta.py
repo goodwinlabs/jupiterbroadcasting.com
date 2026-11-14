@@ -8,7 +8,7 @@ from playwright.sync_api import APIRequestContext, Page, expect
 
 from episode_data import CONTENT, CONTENT_SHOW, Episode, episodes_by_date
 
-SITE_PAGES = ["/", "/show/", "/archive/", "/membership/", "/live/", "/community/", "/sponsors/", "/contact/", "/calendar/", "/people/"]
+SITE_PAGES = ["/", "/show/", "/membership/", "/live/", "/community/", "/sponsors/", "/contact/", "/calendar/", "/people/"]
 SITEMAP_NS = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 OGIMAGE = re.search(r'^ogimage\s*=\s*"([^"]+)"', (CONTENT.parent / "config/_default/params.toml").read_text(), re.M).group(1)
 

@@ -7,6 +7,180 @@ services:
     buildCommand: bash build.sh
     staticPublishPath: public/
     pullRequestPreviewsEnabled: true
+    # Retired shows moved to the archive site; generated from scripts/archived-shows.txt
+    #   (test/test_archive_redirects.py keeps the two in sync)
+    routes:
+      - type: redirect
+        source: /archive/*
+        destination: https://archive.jupiterbroadcasting.com/
+      - type: redirect
+        source: /show/ask-noah-show/*
+        destination: https://archive.jupiterbroadcasting.com/show/ask-noah-show/*
+      - type: redirect
+        source: /show/ask-noah-show
+        destination: https://archive.jupiterbroadcasting.com/show/ask-noah-show/
+      - type: redirect
+        source: /show/beer-is-tasty/*
+        destination: https://archive.jupiterbroadcasting.com/show/beer-is-tasty/*
+      - type: redirect
+        source: /show/beer-is-tasty
+        destination: https://archive.jupiterbroadcasting.com/show/beer-is-tasty/
+      - type: redirect
+        source: /show/bsd-now/*
+        destination: https://archive.jupiterbroadcasting.com/show/bsd-now/*
+      - type: redirect
+        source: /show/bsd-now
+        destination: https://archive.jupiterbroadcasting.com/show/bsd-now/
+      - type: redirect
+        source: /show/choose-linux/*
+        destination: https://archive.jupiterbroadcasting.com/show/choose-linux/*
+      - type: redirect
+        source: /show/choose-linux
+        destination: https://archive.jupiterbroadcasting.com/show/choose-linux/
+      - type: redirect
+        source: /show/coder-radio/*
+        destination: https://archive.jupiterbroadcasting.com/show/coder-radio/*
+      - type: redirect
+        source: /show/coder-radio
+        destination: https://archive.jupiterbroadcasting.com/show/coder-radio/
+      - type: redirect
+        source: /show/computer-action-show/*
+        destination: https://archive.jupiterbroadcasting.com/show/computer-action-show/*
+      - type: redirect
+        source: /show/computer-action-show
+        destination: https://archive.jupiterbroadcasting.com/show/computer-action-show/
+      - type: redirect
+        source: /show/fauxshow/*
+        destination: https://archive.jupiterbroadcasting.com/show/fauxshow/*
+      - type: redirect
+        source: /show/fauxshow
+        destination: https://archive.jupiterbroadcasting.com/show/fauxshow/
+      - type: redirect
+        source: /show/howto-linux/*
+        destination: https://archive.jupiterbroadcasting.com/show/howto-linux/*
+      - type: redirect
+        source: /show/howto-linux
+        destination: https://archive.jupiterbroadcasting.com/show/howto-linux/
+      - type: redirect
+        source: /show/in-depth-look/*
+        destination: https://archive.jupiterbroadcasting.com/show/in-depth-look/*
+      - type: redirect
+        source: /show/in-depth-look
+        destination: https://archive.jupiterbroadcasting.com/show/in-depth-look/
+      - type: redirect
+        source: /show/joint-failures/*
+        destination: https://archive.jupiterbroadcasting.com/show/joint-failures/*
+      - type: redirect
+        source: /show/joint-failures
+        destination: https://archive.jupiterbroadcasting.com/show/joint-failures/
+      - type: redirect
+        source: /show/jupiter-at-nite/*
+        destination: https://archive.jupiterbroadcasting.com/show/jupiter-at-nite/*
+      - type: redirect
+        source: /show/jupiter-at-nite
+        destination: https://archive.jupiterbroadcasting.com/show/jupiter-at-nite/
+      - type: redirect
+        source: /show/legend-of-the-stoned-owl/*
+        destination: https://archive.jupiterbroadcasting.com/show/legend-of-the-stoned-owl/*
+      - type: redirect
+        source: /show/legend-of-the-stoned-owl
+        destination: https://archive.jupiterbroadcasting.com/show/legend-of-the-stoned-owl/
+      - type: redirect
+        source: /show/linux-action-news/*
+        destination: https://archive.jupiterbroadcasting.com/show/linux-action-news/*
+      - type: redirect
+        source: /show/linux-action-news
+        destination: https://archive.jupiterbroadcasting.com/show/linux-action-news/
+      - type: redirect
+        source: /show/linux-action-show/*
+        destination: https://archive.jupiterbroadcasting.com/show/linux-action-show/*
+      - type: redirect
+        source: /show/linux-action-show
+        destination: https://archive.jupiterbroadcasting.com/show/linux-action-show/
+      - type: redirect
+        source: /show/mmorgue/*
+        destination: https://archive.jupiterbroadcasting.com/show/mmorgue/*
+      - type: redirect
+        source: /show/mmorgue
+        destination: https://archive.jupiterbroadcasting.com/show/mmorgue/
+      - type: redirect
+        source: /show/office-hours/*
+        destination: https://archive.jupiterbroadcasting.com/show/office-hours/*
+      - type: redirect
+        source: /show/office-hours
+        destination: https://archive.jupiterbroadcasting.com/show/office-hours/
+      - type: redirect
+        source: /show/plan-b/*
+        destination: https://archive.jupiterbroadcasting.com/show/plan-b/*
+      - type: redirect
+        source: /show/plan-b
+        destination: https://archive.jupiterbroadcasting.com/show/plan-b/
+      - type: redirect
+        source: /show/rover-log/*
+        destination: https://archive.jupiterbroadcasting.com/show/rover-log/*
+      - type: redirect
+        source: /show/rover-log
+        destination: https://archive.jupiterbroadcasting.com/show/rover-log/
+      - type: redirect
+        source: /show/scibyte/*
+        destination: https://archive.jupiterbroadcasting.com/show/scibyte/*
+      - type: redirect
+        source: /show/scibyte
+        destination: https://archive.jupiterbroadcasting.com/show/scibyte/
+      - type: redirect
+        source: /show/self-hosted/*
+        destination: https://archive.jupiterbroadcasting.com/show/self-hosted/*
+      - type: redirect
+        source: /show/self-hosted
+        destination: https://archive.jupiterbroadcasting.com/show/self-hosted/
+      - type: redirect
+        source: /show/stoked/*
+        destination: https://archive.jupiterbroadcasting.com/show/stoked/*
+      - type: redirect
+        source: /show/stoked
+        destination: https://archive.jupiterbroadcasting.com/show/stoked/
+      - type: redirect
+        source: /show/techsnap/*
+        destination: https://archive.jupiterbroadcasting.com/show/techsnap/*
+      - type: redirect
+        source: /show/techsnap
+        destination: https://archive.jupiterbroadcasting.com/show/techsnap/
+      - type: redirect
+        source: /show/tech-talk-today/*
+        destination: https://archive.jupiterbroadcasting.com/show/tech-talk-today/*
+      - type: redirect
+        source: /show/tech-talk-today
+        destination: https://archive.jupiterbroadcasting.com/show/tech-talk-today/
+      - type: redirect
+        source: /show/the-friday-stream/*
+        destination: https://archive.jupiterbroadcasting.com/show/the-friday-stream/*
+      - type: redirect
+        source: /show/the-friday-stream
+        destination: https://archive.jupiterbroadcasting.com/show/the-friday-stream/
+      - type: redirect
+        source: /show/torked/*
+        destination: https://archive.jupiterbroadcasting.com/show/torked/*
+      - type: redirect
+        source: /show/torked
+        destination: https://archive.jupiterbroadcasting.com/show/torked/
+      - type: redirect
+        source: /show/unfilter/*
+        destination: https://archive.jupiterbroadcasting.com/show/unfilter/*
+      - type: redirect
+        source: /show/unfilter
+        destination: https://archive.jupiterbroadcasting.com/show/unfilter/
+      - type: redirect
+        source: /show/user-error/*
+        destination: https://archive.jupiterbroadcasting.com/show/user-error/*
+      - type: redirect
+        source: /show/user-error
+        destination: https://archive.jupiterbroadcasting.com/show/user-error/
+      - type: redirect
+        source: /show/womens-tech-radio/*
+        destination: https://archive.jupiterbroadcasting.com/show/womens-tech-radio/*
+      - type: redirect
+        source: /show/womens-tech-radio
+        destination: https://archive.jupiterbroadcasting.com/show/womens-tech-radio/
     # should have auto deploy enabled by default
     # autoDeploy: true
     # might be something we look into for the future (i.e. GH actions don't need to trigger rebuild for deploy-preview)
