@@ -17,15 +17,15 @@ SLUGS: dict[str, str] = tomllib.loads(EMOJI_SLUGS.read_text())
 HASH = mark.xfail(reason="partials/episode/tags.html leaves '#' unescaped, so the link ends at a URL fragment")
 # (id, tag, episode carrying it, marks for the link from that episode page); episodes are in EXTRA_EPISODES
 CASES: list[tuple[str, str, str, list]] = [
-    ("space", "coder radio", "/show/coder-radio/451/", []),
-    ("apostrophe", "apple's plan to crack small business", "/show/coder-radio/443/", []),
-    ("ampersand", "shearman & sterling", "/show/linux-action-news/129/", []),
+    ("space", "linux distro wars", "/show/jupiter-extras/1/", []),
+    ("apostrophe", "fry's electronics", "/show/jupiter-extras/87/", []),
+    ("ampersand", "ada & zangemann", "/show/linux-unplugged/510/", []),
     ("space-hyphen", "sudo rm -rf", "/show/linux-unplugged/565/", []),
-    ("plus", "disney+ drm", "/show/linux-action-news/129/", []),
-    ("dot", "ruby vs. c++", "/show/coder-radio/451/", []),
-    ("curly-quote", "epic\u2019s appeal", "/show/coder-radio/451/", []),
-    ("hash-leading", "#freefortnite", "/show/coder-radio/451/", [HASH]),
-    ("hash-trailing", "c#", "/show/coder-radio/343/", [HASH]),
+    ("plus", "gtk+", "/show/linux-unplugged/261/", []),
+    ("dot", "ubuntu 18.04 sp1 lts", "/show/jupiter-extras/4/", []),
+    ("curly-quote", "please don\u2019t theme", "/show/linux-unplugged/303/", []),
+    ("hash-leading", "#yesmom", "/show/jupiter-extras/21/", [HASH]),
+    ("hash-trailing", "c#", "/show/linux-unplugged/378/", [HASH]),
     ("emoji", "🤦", "/show/linux-unplugged/565/", []),
     ("emoji-only", "🦒", "/show/linux-unplugged/604/", []),
     ("emoji-only-multi", "🤟❄️⚖️", "/show/linux-unplugged/604/", []),
@@ -111,7 +111,7 @@ def test_tag_page_heading(page: Page, api_request_context: APIRequestContext):
     """
     A tag page titles itself with the tag and lists the episodes carrying it as cards
     """
-    episodes = ["/show/coder-radio/451/", "/show/linux-unplugged/565/"]
+    episodes = ["/show/linux-unplugged/565/"]
     page.goto("/tags/microsoft/")
     assert page.locator("h1.title").inner_text().split() == ["Tag:", "microsoft"]
     assert page.locator(".card-episode").count() >= len(episodes)

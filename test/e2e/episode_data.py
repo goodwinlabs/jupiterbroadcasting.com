@@ -12,12 +12,16 @@ ARCHIVED_SAMPLE: int = 1
 
 EXTRA_EPISODES: list[tuple[str, str]] = [
     ("linux-unplugged", "434"),  # 3 hosts and 3 guests
-    ("coder-radio", "343"),  # no sponsors
-    ("coder-radio", "443"),  # tag with an apostrophe (issue #534)
+    ("jupiter-extras", "87"),  # tag with an apostrophe (issue #534)
     ("linux-unplugged", "604"),  # two emoji-only tags, one multi-codepoint (issue #516)
-    ("coder-radio", "451"),  # tags with a space, leading '#', curly quote, '+' and '.'
+    ("jupiter-extras", "1"),  # tag with a space
+    ("jupiter-extras", "4"),  # tag with a '.'
+    ("jupiter-extras", "21"),  # tag with a leading '#'
+    ("linux-unplugged", "261"),  # tag with a '+'
+    ("linux-unplugged", "303"),  # tag with a curly quote
+    ("linux-unplugged", "378"),  # tag with a trailing '#'
     ("linux-unplugged", "565"),  # tags with ' -', an apostrophe, and an emoji
-    ("linux-action-news", "129"),  # tags with ' & ' and '+'
+    ("linux-unplugged", "510"),  # tag with ' & '
 ]
 
 

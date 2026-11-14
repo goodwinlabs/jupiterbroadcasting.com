@@ -61,9 +61,11 @@ SAMPLE_GUESTS = sorted(
 @mark.parametrize("person", [param(p, id=p.username) for p in LISTED_PEOPLE])
 def test_people_list_link_target(api_request_context: APIRequestContext, person: Person):
     """
-    Every host/guest card on /people/ links to a page that exists
+    Every host/guest card on /people/ links to a page that exists: their host/guest page when they're on an
+    episode here, otherwise their person page (jb-hugo-theme: layouts/partials/people/small.html)
     """
-    path = f"/{person.type}s/{person.username}/"
+    on_episodes = (HOSTED if person.type == "host" else GUESTED)[person.username]
+    path = f"/{person.type}s/{person.username}/" if on_episodes else f"/people/{person.username}/"
     response = api_request_context.get(path)
     assert response.status == 200, f"{path} returned {response.status}"
 

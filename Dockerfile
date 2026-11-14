@@ -21,4 +21,11 @@ RUN sed -i 's/#error_page/error_page/' /etc/nginx/conf.d/default.conf
 # episodes.json need no override: stock mime.types already serve .txt as
 # text/plain and .json as application/json.)
 RUN sed -i '/listen  /i\    location ~ \\.md$ { root /usr/share/nginx/html; default_type text/markdown; }' /etc/nginx/conf.d/default.conf
+# Retired shows moved to the archive site: 301 every /show/<retired-slug>/... URL and /archive/ there.
+#   Inserted first so these win over the .md location above (nginx uses the first matching regex location).
+#   Slugs come from scripts/archived-shows.txt; render.yaml has the same redirects for Render.
+COPY scripts/archived-shows.txt /tmp/archived-shows.txt
+RUN shows="$(grep -v '^#' /tmp/archived-shows.txt | grep . | paste -sd'|')" \
+    && sed -i "/^server {/a\\    location ~ ^/show/(${shows})(/.*)?\$ { return 301 https://archive.jupiterbroadcasting.com\$request_uri; }\n    location ~ ^/archive(/.*)?\$ { return 301 https://archive.jupiterbroadcasting.com/; }" /etc/nginx/conf.d/default.conf \
+    && rm /tmp/archived-shows.txt
 COPY --from=builder /site/public /usr/share/nginx/html

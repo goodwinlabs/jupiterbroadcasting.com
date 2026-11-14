@@ -166,8 +166,8 @@ title = 'Jupiter Broadcasting'
 
 [[Menu.Main]]
     name = "Archive"
-    identifier = "archive"
-    url = "/archive/"
+    identifier = "ext-archive"
+    url = "https://archive.jupiterbroadcasting.com/"
     weight =90
 
 [[Menu.Main]]
