@@ -1,0 +1,16 @@
+{{- /* Retired shows moved to the archive site. Production 301s them in nginx (Dockerfile); this covers hosts that
+  only serve static files, like Render services made outside a Blueprint. Overrides the theme's empty hook. */ -}}
+{{- $shows := slice -}}
+{{- range split (os.ReadFile "scripts/archived-shows.txt") "\n" -}}
+  {{- with trim . " \r" -}}{{- if not (hasPrefix . "#") -}}{{- $shows = $shows | append . -}}{{- end -}}{{- end -}}
+{{- end }}
+<script>
+  (function () {
+    var to = {{ strings.TrimSuffix "/" site.Params.archive_url }};
+    var shows = {{ $shows }};
+    var path = location.pathname;
+    var show = path.match(/^\/show\/([^\/]+)(\/|$)/);
+    if (/^\/archive(\/|$)/.test(path)) location.replace(to + "/");
+    else if (show && shows.indexOf(show[1]) !== -1) location.replace(to + path + location.search + location.hash);
+  })();
+</script>
