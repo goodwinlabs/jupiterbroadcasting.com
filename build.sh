@@ -21,4 +21,14 @@ export PATH="${tools}/hugo:${tools}/dart-sass:${tools}/go/bin:${PATH}"
 sass --version
 hugo version
 go version
-hugo --minify --gc --baseURL '/'
+# Render previews: absolute URLs use this deploy's own address, and ARCHIVE_URL (set on the Render service) points the
+#   Archive menu link and the retired-show redirects at the matching archive deploy instead of production
+base_url="${RENDER_EXTERNAL_URL:-/}"
+config=config.toml
+if [ -n "${ARCHIVE_URL:-}" ]; then
+  config=$(mktemp ./.render-config-XXXXXX.toml)
+  trap 'rm -f "$config"' EXIT
+  sed "s#https://archive.jupiterbroadcasting.com#${ARCHIVE_URL%/}#g" config.toml > "$config"
+fi
+echo "baseURL=${base_url} archive=${ARCHIVE_URL:-production}"
+hugo --minify --gc --baseURL "$base_url" --config "$config"
