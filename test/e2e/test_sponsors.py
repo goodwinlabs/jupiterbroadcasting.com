@@ -41,7 +41,7 @@ def _published(date: str) -> datetime:
 
 def _expected_sections(cutoff: datetime) -> dict[str, set[str]]:
     """
-    heading -> sponsor links, per themes/jb/layouts/sponsors/list.html for a build at cutoff + LOOKBACK_DAYS
+    heading -> sponsor links, per jb-hugo-theme layouts/sponsors/list.html for a build at cutoff + LOOKBACK_DAYS
     """
     sections = {"Jupiter Broadcasting": set(_toml_list((CONTENT / "sponsors/_index.md").read_text(), "sponsors"))}
     for show_dir in sorted(p for p in CONTENT_SHOW.iterdir() if (p / "_index.md").exists()):

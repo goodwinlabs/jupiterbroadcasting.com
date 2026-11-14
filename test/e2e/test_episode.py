@@ -28,7 +28,7 @@ def test_sample_episodes_shape():
 def test_episode_page_title(page: Page, ep: Episode):
     """
     Tab title is "<title> | <show> <number> | Jupiter Broadcasting", or "<show> <number> | Jupiter Broadcasting"
-    when the episode title is just the show name and number (themes/jb/layouts/partials/meta.html)
+    when the episode title is just the show name and number (jb-hugo-theme: layouts/partials/meta.html)
     """
     page.goto(ep.url, wait_until="domcontentloaded")
     show_and_number = re.escape(f"{ep.data['show_name']} {ep.number}")
