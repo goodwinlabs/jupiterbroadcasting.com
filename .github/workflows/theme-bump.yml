@@ -69,7 +69,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$BRANCH"
           git commit -qam "Bump jb-hugo-theme to ${SHA}"
-          git push -f origin "$BRANCH"
+          # an open bump branch with the same pins needs no new push (a push restarts its checks)
+          if git fetch -q origin "$BRANCH" 2>/dev/null && git diff --quiet FETCH_HEAD -- go.mod go.sum; then
+            echo "$BRANCH already has these pins"
+          else
+            git push -f origin "$BRANCH"
+          fi
           body="Pins \`${THEME_MODULE}\` to \`${VERSION}\` ([commits](https://${THEME_MODULE}/commits/${SHA})).
 
           Opened by \`.github/workflows/theme-bump.yml\`. The site built with this theme before the PR was opened; check the Render preview, then merge. Production gets it with the next develop → main release PR."
@@ -87,4 +92,9 @@ jobs:
             fi
             echo "$out"
           fi
-          gh pr merge "$BRANCH" --auto --squash || echo "Auto-merge unavailable (enable 'Allow auto-merge' and a required check on develop)"
+          # --auto merges at once when develop requires no checks, so only use it once e2e is a required check there
+          if gh api "repos/${GITHUB_REPOSITORY}/branches/develop/protection/required_status_checks" >/dev/null 2>&1; then
+            gh pr merge "$BRANCH" --auto --squash || echo "Auto-merge unavailable (enable 'Allow auto-merge' in repo settings)"
+          else
+            echo "::notice::develop has no required checks; merge the bump PR after e2e passes"
+          fi
