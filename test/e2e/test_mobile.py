@@ -3,7 +3,7 @@ from typing import Tuple
 from pytest import mark
 from playwright.sync_api import Page, expect
 
-# matches Bulma's $tablet (themes/jb/assets/css/libs/bulma/sass/utilities/initial-variables.sass)
+# matches Bulma's $tablet (jb-hugo-theme: assets/css/libs/bulma/sass/utilities/initial-variables.sass)
 BULMA_TABLET = 769
 
 OVERFLOW_PAGES = [

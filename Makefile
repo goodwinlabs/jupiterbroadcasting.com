@@ -15,6 +15,19 @@ dev-build: ## Generate the development docker container
 dev: dev-build ## Run the development hugo container
 	docker run --rm -it -v "$${PWD}":/app -w /app -p $${HOST_IP:-127.0.0.1}:1313:1313 jb_hugo:latest
 
+THEME_DIR ?= ../jb-hugo-theme
+THEME_MODULE := github.com/goodwinlabs/jb-hugo-theme
+# mounts the parent folder so the sibling theme checkout is visible inside the container
+DEV_THEME_RUN = docker run --rm -it -v "$$(cd .. && pwd)":/work -w /work/$(notdir $(CURDIR)) \
+	-e HUGO_MODULE_REPLACEMENTS="$(THEME_MODULE) -> /work/$(notdir $(abspath $(THEME_DIR)))" \
+	-p $${HOST_IP:-127.0.0.1}:1313:1313 jb_hugo:latest
+
+dev-theme: dev-build ## Run the development hugo container against a local jb-hugo-theme checkout (THEME_DIR, default ../jb-hugo-theme)
+	$(DEV_THEME_RUN) serve -D --bind 0.0.0.0
+
+dev-tests-theme: dev-build ## Like dev-tests, against a local jb-hugo-theme checkout
+	$(DEV_THEME_RUN) serve -D --bind 0.0.0.0 --disableFastRender
+
 dev-metrics: dev-build ## Run the development hugo container with metrics
 	docker run --rm -it -v "$${PWD}":/app -w /app -p $${HOST_IP:-127.0.0.1}:1313:1313 jb_hugo:latest serve -D --bind 0.0.0.0 --templateMetrics --templateMetricsHints
 

@@ -3,7 +3,9 @@ locale = 'en-us'
 title = 'Jupiter Broadcasting'
 # enableGitInfo = true
 
-theme = 'jb'
+[module]
+  [[module.imports]]
+    path = "github.com/goodwinlabs/jb-hugo-theme"
 
 [pagination]
   pagerSize = 12

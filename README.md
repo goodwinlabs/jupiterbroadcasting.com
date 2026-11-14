@@ -36,6 +36,25 @@ To build and run the site run
 
 This will build the site (all 28000+ pages) and takes anywhere from 30s - 5 minutes depending on your hardware. This is expected due to the size of the site.
 
+#### Theme
+
+The theme lives in its own repo, [jb-hugo-theme](https://github.com/goodwinlabs/jb-hugo-theme), and is imported as a
+[Hugo Module](https://gohugo.io/hugo-modules/) (see `[module]` in `config.toml`; the exact commit is pinned in `go.mod`).
+Retired shows live in [archive.jupiterbroadcasting.com](https://github.com/goodwinlabs/archive.jupiterbroadcasting.com),
+which imports the same theme.
+
+To work on the theme and this site together, clone the theme next to this repo and run:
+
+    make dev-theme
+
+That serves this site against `../jb-hugo-theme` (override with `THEME_DIR=...`); saving a theme file live-reloads the
+page. `make dev` uses the theme commit pinned in `go.mod`.
+
+Theme updates arrive as automated "Bump jb-hugo-theme" PRs into `develop` (`.github/workflows/theme-bump.yml`).
+To bump by hand:
+
+    docker run --rm -v "$PWD":/src -w /src --entrypoint hugo ghcr.io/gohugoio/hugo:v0.169.0 mod get github.com/goodwinlabs/jb-hugo-theme@develop
+
 #### Deployment
 
 Deployment is done with Github Actions, see workflow file in `.github/workflows/deploy-prod.yml`

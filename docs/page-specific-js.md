@@ -12,7 +12,7 @@ You'll need to modify the theme that's applied to the markdown that Hugo process
 
 ### Ading to a Partial
 
-1. Add your fancy new JS in a file, `fancy.js` in `themes/jb/assets/js`
+1. Add your fancy new JS in a file, `fancy.js` in `assets/js` of the [theme repo](https://github.com/goodwinlabs/jb-hugo-theme)
 2. Go find whichever partial your code belongs to, `fancy.html`, and put all of the following in a `{{ define "headcontent" }}` hugo block
 3. Add a Hugo reference to the HTML
 
@@ -80,6 +80,6 @@ Example below:
 
 ### Adding to Main
 
-1. Add a function to `themes/jb/assets/js/main.js`
+1. Add a function to `assets/js/main.js` in the theme repo
 2. Call your function
     - See [above](###adding-to-a-partial), point 5

@@ -94,7 +94,7 @@ def test_footer_community_links(page: Page):
 @mark.parametrize(
     "path, edit_url",
     [
-        param("/", f"{GITHUB_REPO}/blob/main/themes/jb/layouts/index.html", id="home"),
+        param("/", "https://github.com/goodwinlabs/jb-hugo-theme/blob/main/layouts/index.html", id="home"),
         param("/membership/", f"{GITHUB_REPO}/tree/main/content/membership/index.md", id="membership"),
         param("/community/irc/", f"{GITHUB_REPO}/tree/main/content/community/irc.md", id="community-irc"),
     ],

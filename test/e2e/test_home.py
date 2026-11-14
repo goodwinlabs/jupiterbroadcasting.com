@@ -43,7 +43,7 @@ def test_home_pagination(page: Page):
 
 def _expected_slides() -> list[str]:
     """
-    One slide per active show, newest episode first (themes/jb/layouts/index.html).
+    One slide per active show, newest episode first (jb-hugo-theme: layouts/index.html).
     Future-dated episodes aren't built, so they don't count toward "newest"
     """
     now = datetime.now(timezone.utc)

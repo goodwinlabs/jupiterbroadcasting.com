@@ -47,7 +47,7 @@ SHOW_HOSTS: dict[str, list[str]] = {
 }
 
 
-# who /people/ links to (themes/jb/layouts/people/list.html)
+# who /people/ links to (jb-hugo-theme: layouts/people/list.html)
 LISTED_PEOPLE = [
     p for p in PEOPLE.values() if p.type == "guest" or (p.type == "host" and not p.archived)
 ]
